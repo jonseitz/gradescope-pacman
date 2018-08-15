@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# working dir is /autograder
+# student code is /autograder/source
+cd /autograder/source/code
+
+#run the pacman autograder, pointing to student uploads dir (/autograder/submission)
+python ./autograder.py --gradescope-output --student-code=/autograder/submission/search.py,/autograder/submission/searchAgents.py
+
+#add the stdout_visibility field to the GS json file and write to results directory
+sed -e '0,/{/s/{/{"stdout_visibility": "visible", /' ./gradescope_response.json > /autograder/results/results.json
+
